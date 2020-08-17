@@ -4,15 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Network</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        canvas{
+            position:absolute;
+            width:100%;
+            height:100%;
+        }
+    </style>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/Vector.js"></script>
+    <script src="/public/GameObject/GameObject.js"></script>
+    <script src="/public/GameObject/Component.js"></script>
+    <script src="/public/GameObject/Transform.js"></script>
     <script src="/public/NetWork.js"></script>
     <script src="/public/Input.js"></script>
     <script src="/public/Render.js"></script>
     <script src="/public/Audio.js"></script>
+    <script src="/public/Time.js"></script>
+    <script src="/public/Scene.js"></script>
+    <script src="/public/Game.js"></script>
 </head>
 <body>
+    <canvas id="Game"></canvas>
 <script>
-    
+    let login = new Scene('login');
+    let go = new GameObject('go_1');
+    go.SetParent(login);
+    console.log(go.GetComponent("Transform"));
+
+    Game.AddScene(login);
+    Game.StartScene(0);
+    console.log(Game)
 </script>
 </body>
 </html>
