@@ -40,10 +40,10 @@ class GameObject{
         if(typeof index === "number" && index >= 0 && index < this.data.length)return this.data[index];
     }
     Destroy(){
-        if(this.parent){
-            let data = this.parent.data;
-            data.splice(data.indexOf(this),1);
-        }
-        delete this;
+        // if(this.parent){
+        //     let data = this.parent.data;
+        //     data.splice(data.indexOf(this),1);
+        // }
+        // delete this;
     }
 }
