@@ -33,11 +33,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
     77:1046.5
   };
   var time;
-  window.onkeydown = function(e){
-    if(arrFrequency[e.keyCode]){
-      NetWork.Send('cmd',{f:arrFrequency[e.keyCode],type:"triangle"});
-      time = Date.now();
-    }
+  // window.onkeydown = function(e){
+  //   if(arrFrequency[e.keyCode]){
+  //     NetWork.Send('cmd',{f:arrFrequency[e.keyCode],type:"triangle"});
+  //     time = Date.now();
+  //   }
+  // }
+  Input.KeyDown = (e) => {
+    console.log(KeyCode[e]);
+  }
+  Input.KeyUp = (e) => {
+    console.log(KeyCode[e]);
   }
   NetWork.OnMessage = function(data){
     console.log(Date.now() - time);
