@@ -3,6 +3,45 @@ class Scene{
         this.name = name;
         this.data = [];
     }
+    Loop(){
+        this.Awake();
+        this.OnEnable();
+        this.Start();
+        this.Update();
+        this.OnDisable();
+        this.OnDestroy();
+    }
+    Awake(){
+        for(var i in this.data){
+            this.data[i].Awake();
+        }
+    }
+    OnEnable(){
+        for(var i in this.data){
+            this.data[i].OnEnable();
+        }
+    }
+    Start(){
+        for(var i in this.data){
+            this.data[i].Start();
+        }
+    }
+    Update(dt){
+        for(var i in this.data){
+            this.data[i].Update();
+        }
+    }
+    OnDisable(){
+        for(var i in this.data){
+            this.data[i].OnDisable();
+        }
+    }
+    OnDestroy(){
+        for(var i in this.data){
+            this.data[i].OnDestroy();
+        }
+    }
+
     Add(gameObject){
         if(gameObject.parent){
             let data = gameObject.parent.data;
@@ -15,11 +54,5 @@ class Scene{
         route = route.split('/');
         console.log(route);
     }
-    Update(dt){
-        for(var i in this.data){
-            for(var j in this.data[i].components){
-                if(this.data[i].components[j].Update)this.data[i].components[j].Update(dt);
-            }
-        }
-    }
+    
 }

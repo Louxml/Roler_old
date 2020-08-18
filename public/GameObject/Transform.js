@@ -6,4 +6,8 @@ class Transform extends Component{
         this.scale = new Vector(1,1);
         this.anchor = new Vector(0.5,0.5);
     }
+
+    Destroy(){
+        console.warn("不可移除");
+    }
 }

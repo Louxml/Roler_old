@@ -4,13 +4,103 @@ class GameObject{
         this.active = true;
         this.parent = null;
         this.data = [];
+        this.state = 0;
+        this.components = [];
         this.transform = new Transform();
-        this.components = [this.transform];
+        this.AddComponent(this.transform);
+
+        this.isDestroy = false;
+    }
+    Awake(){
+        if(!this.active)return;
+        for(var i in this.data){
+            this.data[i].Awake();
+        }
+        for(var i in this.components){
+            if(!this.components[i].enabled)continue;
+            if(this.components[i].isAwake)this.components[i].Awake();
+            this.components[i].isAwake = false;
+        }
+    }
+    OnEnable(){
+        if(!this.active)return;
+        for(var i in this.data){
+            this.data[i].OnEnable();
+        }
+        for(var i in this.components){
+            if(!this.components[i].enabled)continue;
+            if(this.components[i].isOnEnable)this.components[i].OnEnable();
+            this.components[i].isOnEnable = false;
+        }
+    }
+    Start(){
+        if(!this.active)return;
+        for(var i in this.data){
+            this.data[i].Start();
+        }
+        for(var i in this.components){
+            if(!this.components[i].enabled)continue;
+            if(this.components[i].isStart)this.components[i].Start();
+            this.components[i].isStart = false;
+        }
+    }
+    Update(){
+        if(!this.active)return;
+        for(var i in this.data){
+            this.data[i].Update();
+        }
+        for(var i in this.components){
+            if(!this.components[i].enabled)continue;
+            this.components[i].Update();
+        }
+    }
+    OnDisable(){
+        for(var i in this.data){
+            this.data[i].OnDisable();
+        }
+        for(var i in this.components){
+            if(this.components[i].isOnDisable)this.components[i].OnDisable();
+            this.components[i].isOnDisable = false;
+        }
+    }
+    OnDestroy(){
+        for(var i in this.data){
+            this.data[i].OnDestroy();
+            if(this.data[i].isDestroy){
+                this.data.splice(i,1);
+            }
+        }
+        for(var i in this.components){
+            if(this.components[i].isDestroy){
+                this.components[i].OnDestroy();
+                this.components.splice(i,1);
+            }
+        }
+    }
+
+
+    GetActive(){
+        return this.active;
     }
     SetActive(active){
-        if(typeof active == "boolean"){
+        if(typeof active == "boolean" && active != this.active){
+            for(var i in this.components){
+                this.components[i].isOnEnable = active;
+                this.components[i].isOnDisable = !active;
+            }
             this.active = active;
         }
+    }
+    Add(gameObject){
+        if(gameObject.constructor.name === "GameObject"){
+            
+        }
+        if(gameObject.parent){
+            let data = gameObject.parent.data;
+            data.splice(data.indexOf(gameObject),1);
+        }
+        gameObject.parent = this;
+        this.data.push(gameObject);
     }
     SetParent(obj){
         obj.Add(this);
@@ -29,6 +119,7 @@ class GameObject{
                 return false;
             }
         }
+        comp.gameObject = this;
         this.components.push(comp);
         return true;
     }
@@ -40,10 +131,9 @@ class GameObject{
         if(typeof index === "number" && index >= 0 && index < this.data.length)return this.data[index];
     }
     Destroy(){
-        // if(this.parent){
-        //     let data = this.parent.data;
-        //     data.splice(data.indexOf(this),1);
-        // }
-        // delete this;
+        for(var i in this.components){
+            this.components[i].Destroy();
+        }
+        this.isDestroy = true;
     }
 }
