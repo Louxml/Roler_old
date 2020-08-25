@@ -2,13 +2,14 @@ class GameObject{
     constructor(name="GameObject"){
         this.name = name;
         this.active = true;
+        this.scene = null;
         this.parent = null;
         this.data = [];
-        this.state = 0;
+        this.layer = Render.layer[0];
+        this.zoom = 0;
         this.components = [];
         this.transform = new Transform();
         this.AddComponent(this.transform);
-
         this.isDestroy = false;
     }
     Awake(){
@@ -44,14 +45,14 @@ class GameObject{
             this.components[i].isStart = false;
         }
     }
-    Update(){
+    Update(dt){
         if(!this.active)return;
         for(var i in this.data){
-            this.data[i].Update();
+            this.data[i].Update(dt);
         }
         for(var i in this.components){
             if(!this.components[i].enabled)continue;
-            this.components[i].Update();
+            this.components[i].Update(dt);
         }
     }
     OnDisable(){
@@ -91,16 +92,21 @@ class GameObject{
             this.active = active;
         }
     }
+    SetName(name){
+        this.name = String(name);
+    }
     Add(gameObject){
         if(gameObject.constructor.name === "GameObject"){
-            
+            if(gameObject.parent){
+                let data = gameObject.parent.data;
+                data.splice(data.indexOf(gameObject),1);
+            }
+            gameObject.parent = this;
+            gameObject.scene = this.scene;
+            this.data.push(gameObject);
+        }else{
+            //警告信息
         }
-        if(gameObject.parent){
-            let data = gameObject.parent.data;
-            data.splice(data.indexOf(gameObject),1);
-        }
-        gameObject.parent = this;
-        this.data.push(gameObject);
     }
     SetParent(obj){
         obj.Add(this);
@@ -121,14 +127,35 @@ class GameObject{
         }
         comp.gameObject = this;
         this.components.push(comp);
-        return true;
+        return this;
+    }
+    SetLayer(layer){
+        if(Render.layer.includes(layer)){
+            this.layer = layer;
+        }else{
+            //警告信息
+        }
+    }
+    SetZoom(index){
+        if(typeof index == "number"){
+            this.zoom = index;
+        }else{
+            //警告信息
+        }
     }
     Find(route){
-        route = route.split('/');
-        console.log(route);
+        if(typeof route === "string"){
+            route = route.split('/');
+            console.log(route);
+        }else{
+            //警告信息
+        }
     }
     GetChild(index){
         if(typeof index === "number" && index >= 0 && index < this.data.length)return this.data[index];
+        else{
+            //警告信息
+        }
     }
     Destroy(){
         for(var i in this.components){

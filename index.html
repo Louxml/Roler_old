@@ -19,7 +19,9 @@
     <script src="/public/Vector.js"></script>
     <script src="/public/GameObject/GameObject.js"></script>
     <script src="/public/GameObject/Component.js"></script>
+    <script src="/public/GameObject/Camera.js"></script>
     <script src="/public/GameObject/Transform.js"></script>
+    <script src="/public/GameObject/Sprite.js"></script>
     <script src="/public/NetWork.js"></script>
     <script src="/public/Input.js"></script>
     <script src="/public/Render.js"></script>
@@ -31,14 +33,17 @@
 <body>
     <canvas id="Game"></canvas>
 <script>
-    let login = new Scene('login');
-    let go = new GameObject('go_1');
-    go.SetParent(login);
-    console.log(go.GetComponent("Transform"));
+    window.onload = function(e){
+        let login = new Scene('login');
+        let go = new GameObject('sprite');
+        go.AddComponent(new Sprite());
+        go.SetParent(login);
+        console.log(go.GetComponent("Transform"));
 
-    Game.AddScene(login);
-    Game.StartScene(0);
-    console.log(Game)
+        Game.scene.Add(login);
+        Game.scene.Start(0);
+        console.log(Game);
+    }
 </script>
 </body>
 </html>
