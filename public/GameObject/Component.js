@@ -27,6 +27,9 @@ class Component{
     Update(dt){
         
     }
+    Render(dt){
+        
+    }
     OnDisable(){
         
     }

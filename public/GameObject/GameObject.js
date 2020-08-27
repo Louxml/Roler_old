@@ -5,7 +5,7 @@ class GameObject{
         this.scene = null;
         this.parent = null;
         this.data = [];
-        this.layer = Render.layer[0];
+        this.layer = Render.layers[0];
         this.zoom = 0;
         this.components = [];
         this.transform = new Transform();
@@ -55,6 +55,16 @@ class GameObject{
             this.components[i].Update(dt);
         }
     }
+    Render(dt){
+        if(!this.active)return;
+        for(var i in this.data){
+            this.data[i].Render(dt);
+        }
+        for(var i in this.components){
+            if(!this.components[i].enabled)continue;
+            this.components[i].Render(dt);
+        }
+    }
     OnDisable(){
         for(var i in this.data){
             this.data[i].OnDisable();
@@ -68,6 +78,7 @@ class GameObject{
         for(var i in this.data){
             this.data[i].OnDestroy();
             if(this.data[i].isDestroy){
+                //移除场景
                 this.data.splice(i,1);
             }
         }
@@ -158,9 +169,15 @@ class GameObject{
         }
     }
     Destroy(){
+        // 本身销毁标记
+        this.isDestroy = true;
+        //本身组件销毁
         for(var i in this.components){
             this.components[i].Destroy();
         }
-        this.isDestroy = true;
+        //子级销毁
+        for(var i in this.data){
+            this.data[i].Destroy();
+        }
     }
 }

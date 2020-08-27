@@ -11,17 +11,17 @@
         }
         canvas{
             position:absolute;
-            width:100%;
-            height:100%;
         }
     </style>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/public/Vector.js"></script>
+    <script src="/public//Color.js"></script>
     <script src="/public/GameObject/GameObject.js"></script>
     <script src="/public/GameObject/Component.js"></script>
     <script src="/public/GameObject/Camera.js"></script>
     <script src="/public/GameObject/Transform.js"></script>
     <script src="/public/GameObject/Sprite.js"></script>
+    <script src="/public/Loader.js"></script>
     <script src="/public/NetWork.js"></script>
     <script src="/public/Input.js"></script>
     <script src="/public/Render.js"></script>
@@ -33,17 +33,42 @@
 <body>
     <canvas id="Game"></canvas>
 <script>
-    window.onload = function(e){
+    // window.onload = function(e){
         let login = new Scene('login');
-        let go = new GameObject('sprite');
-        go.AddComponent(new Sprite());
-        go.SetParent(login);
-        console.log(go.GetComponent("Transform"));
+        
+        let image = Loader.Image("player","/public/Assets/player.png");
+        let go = new GameObject('sprite1');
+        let spComp = new Sprite(image);
+        // spComp.SetFilpY(true);
+        go.AddComponent(spComp);
+        // go.transform.scale = new Vector(50,50);
+        // go.zoom = 5;
+        let go1 = new GameObject('sprite2');
+        go1.AddComponent(new Sprite(image));
+        go1.zoom = 1;
+        go1.transform.position = new Vector(0,200);
+        let go2 = new GameObject('sprite3');
+        go2.AddComponent(new Sprite(image));
+        go2.zoom = 1;
+        go2.transform.position = new Vector(500,0);
+        // login.main.transform.position = new Vector(500,0);
+
+
+        //等同
+        // go.SetParent(login);
+        login.Add(go);
+        // go.Add(go1);
+        // login.Add(go2);
+        // setInterval(function(){
+        //     go.transform.rotate++;
+        // },20)
 
         Game.scene.Add(login);
         Game.scene.Start(0);
+
         console.log(Game);
-    }
+        
+    // }
 </script>
 </body>
 </html>
