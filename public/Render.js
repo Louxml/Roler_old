@@ -36,19 +36,18 @@ let Render = new class Render{
         canvas.width = width | this.width;
         canvas.height = height | this.height;
         let context = canvas.getContext("2d");
+        //完美像素
+        context.pixel = false;
+        //Alpha通道
+        context.alpha = 1;
+        // document.body.appendChild(canvas);
         return context;
     }
-    CameraRender(camera,gameObject){
-        camera.canvas.save();
-        gameObject.transform.Translate(camera);
-        camera.canvas.imageSmoothingEnabled = !gameObject.render.pixel;
-        camera.canvas.globalAlpha = gameObject.render.alpha;
-        camera.canvas.drawImage(gameObject.render.canvas,-gameObject.render.canvas.width/2|0,-gameObject.render.canvas.height/2|0);
-        camera.canvas.restore();
-    }
+    
     Render(){
         if(this.render){
             this.Clear(this.render);
+            // console.log(this.cameras);
             for(var i in this.cameras){
                 let camera = this.cameras[i];
                 let x = this.render.canvas.width * camera.viewport.x;

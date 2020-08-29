@@ -134,5 +134,4 @@ Scene.Start = function(index){
             console.warn("Scene参数错误");
         break;
     }
-    
 }

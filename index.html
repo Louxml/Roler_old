@@ -15,18 +15,21 @@
     </style>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/public/Vector.js"></script>
-    <script src="/public//Color.js"></script>
+    <script src="/public/Color.js"></script>
+    <script src="/public/Asset.js"></script>
+    <script src="/public/Math.js"></script>
     <script src="/public/GameObject/GameObject.js"></script>
     <script src="/public/GameObject/Component.js"></script>
     <script src="/public/GameObject/Camera.js"></script>
     <script src="/public/GameObject/Transform.js"></script>
     <script src="/public/GameObject/Sprite.js"></script>
+    <script src="/public/GameObject/Text.js"></script>
     <script src="/public/Loader.js"></script>
     <script src="/public/NetWork.js"></script>
     <script src="/public/Input.js"></script>
     <script src="/public/Render.js"></script>
     <script src="/public/Audio.js"></script>
-    <script src="/public/Time.js"></script>
+    <script src="/public/Timer.js"></script>
     <script src="/public/Scene.js"></script>
     <script src="/public/Game.js"></script>
 </head>
@@ -36,21 +39,25 @@
     // window.onload = function(e){
         let login = new Scene('login');
         
-        let image = Loader.Image("player","/public/Assets/player.png");
+        Loader.Sprite("player","/public/Assets/player.png",160,160);
+        // Loader.Image("player","/public/Assets/player.png");
+        let image = Loader.GetAsset("player");
         let go = new GameObject('sprite1');
-        let spComp = new Sprite(image);
-        // spComp.SetFilpY(true);
+        let spComp = new Text('123456');
+        // let spComp = new Sprite(image);
+        // spComp.color = new Color(255,0,0);
+        // spComp.pixel = false;
         go.AddComponent(spComp);
-        // go.transform.scale = new Vector(50,50);
+        // go.transform.scale = new Vector(3,3);
         // go.zoom = 5;
-        let go1 = new GameObject('sprite2');
-        go1.AddComponent(new Sprite(image));
-        go1.zoom = 1;
-        go1.transform.position = new Vector(0,200);
-        let go2 = new GameObject('sprite3');
-        go2.AddComponent(new Sprite(image));
-        go2.zoom = 1;
-        go2.transform.position = new Vector(500,0);
+        // let go1 = new GameObject('sprite2');
+        // go1.AddComponent(new Sprite(image));
+        // go1.zoom = 1;
+        // go1.transform.position = new Vector(0,200);
+        // let go2 = new GameObject('sprite3');
+        // go2.AddComponent(new Sprite(image));
+        // go2.zoom = 1;
+        // go2.transform.position = new Vector(500,0);
         // login.main.transform.position = new Vector(500,0);
 
 
@@ -59,9 +66,9 @@
         login.Add(go);
         // go.Add(go1);
         // login.Add(go2);
-        // setInterval(function(){
-        //     go.transform.rotate++;
-        // },20)
+        // let skill = new Timer(function(e){
+            // go.transform.rotate++;
+        // },1000/60,6400);
 
         Game.scene.Add(login);
         Game.scene.Start(0);

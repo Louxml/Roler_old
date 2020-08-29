@@ -1,52 +1,75 @@
-let Loader = new class Loader{
+class Loader{
     constructor(){
-        this.data = {};
-        this.current = 0;
-        this.total = 0;
+        
     }
+}
 
-    Image(name,url){
+Loader.data = {};
+Loader.current = 0;
+Loader.total = 0;
+Loader.Image = function(name,url){
+    if(!this.data[name]){
         let image = new Image();
+        let data = new ImageAsset(image);
         image.onload = function(e){
-            this.data[name] = {
-                data:e.path[0],
-                state:1
-            };
+            data.SetState(1);
+            data.SetSize(image.width,image.height);
             this.current++;
             this.Check();
         }.bind(this);
         image.onerror = function(e){
-            this.data[name] = {
-                data:e.path[0],
-                state:0
-            }
+            data.SetState(2);
             this.current++;
             this.Check();
         }
         this.total++;
         image.src = url;
-        return image;
+        this.data[name] = data;
+    }else{
+        //警告信息
+        console.warn("加载管理器--->>>资源命名已存在",name);
     }
-    
-    Check(){
-        this.OnProgress()
-        if(this.current == this.total){
-            this.Complete();
+}
+Loader.Sprite = function(name,url,width=null,height=null){
+    if(!this.data[name]){
+        let image = new Image();
+        let data = new SpriteAsset(image,width,height);
+        image.onload = function(e){
+            data.SetState(1);
+            data.SetSize(image.width,image.height);
+            this.current++;
+            this.Check();
+        }.bind(this);
+        image.onerror = function(e){
+            data.SetState(2);
+            this.current++;
+            this.Check();
         }
+        this.total++;
+        image.src = url;
+        this.data[name] = data;
+    }else{
+        //警告信息
+        console.warn("加载管理器--->>>资源键值已存在",name);
     }
-    OnProgress(){
+}
+Loader.Check = function(){
+    this.OnProgress();
+    if(this.current == this.total){
+        this.OnComplete();
+    }
+}
+Loader.OnProgress = function(){
 
-    }
-    Complete(){
+}
+Loader.OnComplete = function(){
 
+}
+Loader.GetAsset = function(name){
+    if(this.data[name]){
+        return this.data[name];
+    }else{
+        //警告信息
+        console.warn("加载管理器--->>>资源键值不存在",name);
     }
-    
-    GetAsset(name){
-        if(this.data[name]){
-            return this.data[name].data;
-        }else{
-            //警告信息
-        }
-    }
-    
 }

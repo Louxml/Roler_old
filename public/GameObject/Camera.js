@@ -36,8 +36,16 @@ class Camera extends Component{
         this.canvas.translate(centerX,centerY);
         this.Origin(this.gameObject);
         for(var i in data){
-            Render.CameraRender(this,data[i]);
+            this.CameraRender(data[i]);
         }
+        this.canvas.restore();
+    }
+    CameraRender(gameObject){
+        this.canvas.save();
+        gameObject.transform.Translate(this);
+        this.canvas.imageSmoothingEnabled = !gameObject.render.pixel;
+        this.canvas.globalAlpha = gameObject.render.alpha;
+        this.canvas.drawImage(gameObject.render.canvas,-gameObject.transform.anchor.x * gameObject.render.canvas.width|0,-gameObject.transform.anchor.y * gameObject.render.canvas.height|0);
         this.canvas.restore();
     }
     Tree(gameObject,table){

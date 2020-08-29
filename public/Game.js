@@ -1,15 +1,13 @@
 var Game = {
     loader:Loader,
     scene:Scene,
-    time:Time,
+    timer:Timer,
     render:Render,
     Run(t=0){
         requestAnimationFrame(Game.Run.bind(this));
-        Time.Update(t);
+        Timer.Update(t);
         Scene.Update(t);
         Render.Update(t);
     },
 }
-window.onload = function (){
-    Game.Run();
-}
+Game.Run();
