@@ -6,8 +6,8 @@ var Game = {
     Run(t=0){
         requestAnimationFrame(Game.Run.bind(this));
         Timer.Update(t);
-        Scene.Update(t);
-        Render.Update(t);
+        Scene.Update(Timer.deltaTime);
+        Render.Update(Timer.deltaTime);
     },
 }
 Game.Run();

@@ -24,6 +24,7 @@
     <script src="/public/GameObject/Transform.js"></script>
     <script src="/public/GameObject/Sprite.js"></script>
     <script src="/public/GameObject/Text.js"></script>
+    <script src="/public/GameObject/Particles.js"></script>
     <script src="/public/Loader.js"></script>
     <script src="/public/NetWork.js"></script>
     <script src="/public/Input.js"></script>
@@ -36,46 +37,57 @@
 <body>
     <canvas id="Game"></canvas>
 <script>
-    // window.onload = function(e){
-        let login = new Scene('login');
-        
-        Loader.Sprite("player","/public/Assets/player.png",160,160);
-        // Loader.Image("player","/public/Assets/player.png");
-        let image = Loader.GetAsset("player");
-        let go = new GameObject('sprite1');
-        let spComp = new Text('123456');
-        // let spComp = new Sprite(image);
-        // spComp.color = new Color(255,0,0);
-        // spComp.pixel = false;
-        go.AddComponent(spComp);
-        // go.transform.scale = new Vector(3,3);
-        // go.zoom = 5;
-        // let go1 = new GameObject('sprite2');
-        // go1.AddComponent(new Sprite(image));
-        // go1.zoom = 1;
-        // go1.transform.position = new Vector(0,200);
-        // let go2 = new GameObject('sprite3');
-        // go2.AddComponent(new Sprite(image));
-        // go2.zoom = 1;
-        // go2.transform.position = new Vector(500,0);
-        // login.main.transform.position = new Vector(500,0);
+    // 创建场景
+    let login = new Scene('login');
+    
+    // 测试Sprite组件
+    Loader.Sprite("player","/public/Assets/player.png",160,160);
+    let image = Loader.GetAsset("player");
+    let spComp = new Sprite(image);
+
+    spComp.color = new Color(255,0,0);
+    spComp.pixel = false;
+
+    let sprite = new GameObject('sprite');
+    sprite.AddComponent(spComp);
+    login.Add(sprite);
 
 
-        //等同
-        // go.SetParent(login);
-        login.Add(go);
-        // go.Add(go1);
-        // login.Add(go2);
-        // let skill = new Timer(function(e){
-            // go.transform.rotate++;
-        // },1000/60,6400);
+    // 测试Text组件
+    let textComp = new Text('123456');
 
-        Game.scene.Add(login);
-        Game.scene.Start(0);
+    textComp.color = new Color(255,0,0);
+    textComp.SetSize(100);
 
-        console.log(Game);
-        
-    // }
+    let text = new GameObject('text');
+    text.transform.position = new Vector(0,-100);
+    text.AddComponent(textComp);
+    login.Add(text);
+
+
+    // 测试Particles组件
+    let particlesComp = new Particles();
+    let particles = new GameObject("particles")
+    particles.AddComponent(particlesComp);
+    particles.transform.position = new Vector(0,100);
+    particlesComp.Play();
+    // particles.transform.scale = new Vector(10,10);
+    login.Add(particles);
+    console.log(particlesComp);
+    
+    
+    // 测试Timer系统
+    let skill = new Timer(function(e){
+        sprite.transform.rotate++;
+    },1000/60);
+    skill.Start();
+
+
+    Game.scene.Add(login);
+    Game.scene.Start(0);
+    console.log(Game);
+    
+
 </script>
 </body>
 </html>

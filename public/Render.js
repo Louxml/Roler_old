@@ -33,8 +33,8 @@ let Render = new class Render{
     }
     CreateRender(width=0,height=0){
         let canvas = document.createElement('canvas');
-        canvas.width = width | this.width;
-        canvas.height = height | this.height;
+        canvas.width = width || this.width;
+        canvas.height = height || this.height;
         let context = canvas.getContext("2d");
         //完美像素
         context.pixel = false;

@@ -18,7 +18,7 @@ class Text extends Component{
             this.gameObject.render = Render.CreateRender();
             
         }else{
-            console.warn("render已存在,组件失效");
+            console.warn("Text组件--->>>","render已存在","该组件失效");
             this.SetEnabled(false);
         }
     }

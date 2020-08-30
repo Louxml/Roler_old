@@ -16,7 +16,7 @@ class Sprite extends Component{
             this.gameObject.render = Render.CreateRender();
             this.SetSprite(this.sprite);
         }else{
-            console.warn("render已存在,组件失效");
+            console.warn("Sprite组件--->>>","render已存在","该组件失效");
             this.SetEnabled(false);
         }
     }
@@ -86,7 +86,7 @@ class Sprite extends Component{
             if(this.#state != 0)this.#isRender = true;
         }else{
             // 警告信息
-            console.warn("Image error!");
+            console.log("Sprite组件--->>>","image错误",image);
         }
     }
     SetFilpX(x){
