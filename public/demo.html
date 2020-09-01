@@ -9,11 +9,16 @@
             padding:0;
             margin:0;
         }
+        html,body{
+            width:100%;
+            height:100%;
+            overflow: hidden;
+        }
         canvas{
             position:absolute;
             background:#000;
         }
-        .consoleBox{
+        #consoleBox{
             position:absolute;
             top:0;
             right:0;
@@ -23,12 +28,14 @@
             box-sizing:border-box;
             background:#333;
             overflow-y:auto;
+            overflow:visible;
+            transition:all .4s;
         }
-        .consoleBox .row{
+        #consoleBox .row{
             width:100%;
             height:30px;
         }
-        .consoleBox .row span{
+        #consoleBox .row span{
             display:inline-block;
             width:100px;
             text-align:center;
@@ -40,18 +47,18 @@
             cursor:pointer;
             font-size:10pt;
         }
-        .consoleBox .row span.true{
+        #consoleBox .row span.true{
             color:#69f;
         }
-        .consoleBox .row input[type='range']{
+        #consoleBox .row input[type='range']{
             display:inline-block;
             width:160px;
             height:20px;
             margin-top:5px;
             vertical-align: top;
         }
-        .consoleBox .row input[type='text'],
-        .consoleBox .row input[type='color']{
+        #consoleBox .row input[type='text'],
+        #consoleBox .row input[type='color']{
             display:inline-block;
             width:100px;
             height:24px;
@@ -62,18 +69,26 @@
             text-align:center;
             outline:none;
         }
-        .consoleBox .row .close{
-            width:100%;
-            height:30px;
-            line-height:30px;
+        #consoleBox .close{
+            position:absolute;
+            transform:translate(-100%,-50%);
+            width:50px;
+            height:100px;
+            top:50%;
+            left:0;
+            border-radius:50px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius:0;
+            line-height:100px;
             color:#fff;
-            background:#161616;
+            background:#333;
             text-align:center;
+            cursor: pointer;
         }
-        .consoleBox #gravity{
-            /* display: none; */
+        #consoleBox #gravity{
+            display: none;
         }
-        .consoleBox #radius{
+        #consoleBox #radius{
             display: none;
         }
         #fpsBox{
@@ -112,7 +127,8 @@
 <body>
     <canvas id="Game"></canvas>
     <div id="fpsBox">60FPS</div>
-    <div class="consoleBox">
+    <div id="consoleBox">
+        <div class="close" onclick="OpenConsole()">开关</div>
         <div class="row">
             <span>粒子数量</span>
             <input type="range" id="totalRange" min="0" max="1000" value="0" step="1" oninput="setValue('total',this.value)">
@@ -543,7 +559,14 @@ window.onload = function(){
         if(fps)fps.innerHTML = f + "FPS";
     },1000/2);
     timer.Start()
-    
+    function OpenConsole(){
+        let right = document.getElementById("consoleBox").style.right;
+        if(right != "-400px"){
+            document.getElementById("consoleBox").style.right = "-400px"
+        }else{
+            document.getElementById("consoleBox").style.right = "0px";
+        }
+    }
 
 </script>
 </body>

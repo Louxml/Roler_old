@@ -224,7 +224,6 @@ class Particles extends Component{
     Awake(){
         if(!this.gameObject.render){
 			this.gameObject.render = Render.CreateRender();
-			console.log(this.gameObject.render);
 			this.gameObject.render.globalCompositeOperation="lighter";
         }else{
             console.warn("Particles组件--->>>","render已存在","该组件失效");
