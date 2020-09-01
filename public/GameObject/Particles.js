@@ -118,23 +118,24 @@ class Particles extends Component{
         colorCycle:new Color(0,0,0,0)
     };
     // 发射模式
-    #mode = null;
+	#mode = null;
+	#assetMode = "source-in";
 
 
     constructor(target=0){
         super();
-        if(typeof target != "number" && target.type != "Image")console.warn("Particles组件--->>>","不支持资源",target);
-        this.#target = target;
-        if(typeof this.#target == "number")this.#CreateRender();
-        this.#mode = new Particles.MODE.GRAVITY();
-        this.#Emit();
+		this.setTarget(target);
+		this.setMode(0);
+        
     }
     
-    #CreateRender(){
+    #CreateRender(mode){
         if(this.#target.type == "Image"){
-			this.#render = Render.CreateRender(target.wdith,target.height);
+			let size = Math.max(this.#target.wdith,this.#target.height);
+			this.#render = Render.CreateRender(size,size);
 			this.#render.save();
-			this.#render.drawImage(0,0,target.width,target.height);
+			this.#render.translate((size-this.#target.width)/2,(size-this.#target.height)/2);
+			this.#render.drawImage(this.#target.data,0,0,this.#target.width,this.#target.height);
 			this.#render.restore();
         }else{
 			this.#render = Render.CreateRender(49,49);
@@ -177,15 +178,15 @@ class Particles extends Component{
 			}
 			this.#render.restore();
 		}
-		this.#render.globalCompositeOperation="source-in";
+		this.#assetState = 1;
+		this.#render.globalCompositeOperation=mode;
     }
 
     Update(dt){
 		dt = dt | 0;
         if(this.#target.type == "Image" && this.#target.state != this.#assetState && this.#assetState == 0){
             console.log("加载完成");
-            this.#assetState = this.#target.state;
-            this.#CreateRender();
+            this.#CreateRender(this.#assetMode);
         }
         if(this.#state == 1){
             if(this.#duration == -1 || this.#time < this.#duration){
@@ -301,6 +302,15 @@ class Particles extends Component{
 		this.#emitTimes = 0;
 	}
 	
+	setTarget(target){
+		if(typeof target != "number" && target.type != "Image")console.warn("Particles组件--->>>","不支持资源",target);
+		this.#target = target;
+		this.#assetState = 0;
+        if(typeof this.#target == "number")this.#CreateRender(this.#assetMode);
+	}
+	getTarget(){
+		return this.#target;
+	}
 	setTotal(value){
 		this.#total = Number(value);
 	}
@@ -498,5 +508,18 @@ class Particles extends Component{
 	}
 	getRadiusAccelTanCycle(){
 		return this.#mode.accelTanCycle;
+	}
+	setAssetMode(mode){
+		this.#assetMode = mode;
+		this.setTarget(this.getTarget());
+	}
+	getAssetMode(mode){
+		return this.#render.globalCompositeOperation
+	}
+	setRenderMode(mode){
+		this.gameObject.render.globalCompositeOperation = mode;
+	}
+	getRenderMode(mode){
+		return this.gameObject.render.globalCompositeOperation;
 	}
 }
