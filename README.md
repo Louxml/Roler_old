@@ -57,6 +57,7 @@ GameObject基本组件，游戏对象的定位组件
 #### Scene深度遍历Scene中的data树结构
 
 ## 渲染
+> Canvas 2d渲染
 #### 由渲染组件在GameObject上生成render画布
 #### Camera渲染GameObject
 通过Transform.Origin()递归相机的父物体Transform计算出当前相机距原点的偏离，在通过原点自顶向下遍历游戏物体的Transform，计算出游戏物体距相机的偏离，渲染游戏物体
