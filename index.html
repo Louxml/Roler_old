@@ -18,6 +18,7 @@
     <script src="/public/Color.js"></script>
     <script src="/public/Asset.js"></script>
     <script src="/public/Math.js"></script>
+    <script src="/public/Event.js"></script>
     <script src="/public/GameObject/GameObject.js"></script>
     <script src="/public/GameObject/Component.js"></script>
     <script src="/public/GameObject/Camera.js"></script>
@@ -41,45 +42,47 @@
     let login = new Scene('login');
     
     // 测试Sprite组件
-    Loader.Sprite("player","/public/Assets/player.png",160,160);
-    let image = Loader.GetAsset("player");
-    let spComp = new Sprite(image);
+    // Loader.Sprite("player","/public/Assets/player.png",160,160);
+    // let image = Loader.GetAsset("player");
+    // let spComp = new Sprite(image);
 
-    spComp.color = new Color(255,0,0);
-    spComp.pixel = false;
+    // spComp.color = new Color(255,0,0);
+    // spComp.pixel = false;
 
-    let sprite = new GameObject('sprite');
-    sprite.AddComponent(spComp);
-    login.Add(sprite);
+    // let sprite = new GameObject('sprite');
+    // sprite.AddComponent(spComp);
+    // login.Add(sprite);
 
 
     // 测试Text组件
-    let textComp = new Text('123456');
+    // let textComp = new Text('123456');
 
-    textComp.color = new Color(255,0,0);
-    textComp.SetSize(100);
+    // textComp.color = new Color(255,0,0);
+    // textComp.SetSize(100);
 
-    let text = new GameObject('text');
-    text.transform.position = new Vector(0,-100);
-    text.AddComponent(textComp);
-    login.Add(text);
+    // let text = new GameObject('text');
+    // text.transform.position = new Vector(0,-100);
+    // text.AddComponent(textComp);
+    // login.Add(text);
 
 
     // 测试Particles组件
     let particlesComp = new Particles();
     let particles = new GameObject("particles")
     particles.AddComponent(particlesComp);
-    particles.transform.position = new Vector(0,100);
+    // particles.transform.position = new Vector(0,100);
     particlesComp.Play();
     // particles.transform.scale = new Vector(10,10);
     login.Add(particles);
     console.log(particlesComp);
-    
+
     
     // 测试Timer系统
     let skill = new Timer(function(e){
-        sprite.transform.rotate++;
-    },1000/60);
+        // window.dispatchEvent(myEvent);
+        // particles.transform.position.x++;
+    },1000/500);
+    
     skill.Start();
 
 

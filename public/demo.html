@@ -240,7 +240,7 @@
             </div>
             <div class="row">
                 <span>发射速率</span>
-                <input type="range" id="emissionRange" min="0" max="100" value="0" oninput="setValue('emission',this.value)">
+                <input type="range" id="emissionRange" min="0" max="1000" value="0" oninput="setValue('emission',this.value)">
                 <input type="text" id="emissionValue">
             </div>
             <div class="row">
@@ -646,7 +646,7 @@ window.onload = function(){
     
     var timer = new Timer(function(){
         let f = (1000/Timer.deltaTime)|0;
-        if(fps)fps.innerHTML = f + "FPS";
+        if(fps)fps.innerHTML = f + "FPS/"+particles.getSize();
     },1000/2);
     timer.Start()
     function OpenConsole(){
@@ -685,6 +685,20 @@ window.onload = function(){
             console.log(data);
         };
         particles.setTarget(data);
+    }
+    let isMove = false;
+    Render.canvas.onmousedown = function(e){
+        isMove = true;
+    }
+    Render.canvas.onmousemove = function(e){
+        if(isMove){
+            let x = e.offsetX - (Render.width/2|0);
+            let y = e.offsetY - (Render.height/2|0);
+            particles.gameObject.transform.position = new Vector(x,y);
+        }
+    }
+    Render.canvas.onmouseup = function(e){
+        isMove = false;
     }
 
 </script>

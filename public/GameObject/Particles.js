@@ -67,7 +67,7 @@ class RadiusParticles{
 
 class Particles extends Component{
     
-    static POSITION = { WORLD:0, LOCAL:1, PARENT:2 };
+    static POSITION = { WORLD:0, LOCAL:1 };
     static TARGET = { POINT:0, CIRCLE:1, RECT:2, CIRCLEBORDER:3, RECTBORDER:4 };
     static MODE = { GRAVITY:GravityParticles ,RADIUS:RadiusParticles };
 
@@ -80,9 +80,9 @@ class Particles extends Component{
     // 粒子列表
     #data = [];
     // 位置定位
-    #position = Particles.POSITION.LOCAL;
+    #position = Particles.POSITION.WORLD;
     // 粒子最大数
-    #total = 100;
+    #total = 1000;
     // 时长（-1为永久）
     #duration = -1;
     // 已持续时长
@@ -237,7 +237,9 @@ class Particles extends Component{
         if(this.#data.length < this.#total){
             let p = {};
             p.x = p.x || 0;
-            p.y = p.y || 0;
+			p.y = p.y || 0;
+			p.parent = this.#Translate(this.gameObject);
+			p.position = this.#position;
             p.life = Math.floor(Math.random() * (2*this.#lifeCycle + 1)) + this.#life - this.#lifeCycle;
             p.angular = Math.floor(Math.random() * (2* this.#angularCycle + 1)) + this.#angular - this.#angularCycle;
             p.start = {
@@ -270,13 +272,17 @@ class Particles extends Component{
         let render = this.gameObject.render;
         let image = this.#render.canvas;
         Render.Clear(render);
-        render.save();
+		render.save();
 		render.translate(render.canvas.width/2,render.canvas.height/2);
 		let data = this.#data;
 		for(var i in data){
 			this.#render.fillStyle = new Color(data[i].color.r,data[i].color.g,data[i].color.b);
 			this.#render.fillRect(0,0,this.#render.canvas.width,this.#render.canvas.height);
 			render.save();
+			if(data[i].position == 0){
+				this.#Origin(this.gameObject,render);
+				this.#WorldPosition(render,data[i].parent);
+			}
 			render.translate(data[i].x,data[i].y);
 			render.rotate(data[i].spin * Math.PI / 180);
 			render.globalAlpha = data[i].color.a;
@@ -286,6 +292,38 @@ class Particles extends Component{
         render.restore();
         //轴点固定，且失效
         this.gameObject.transform.anchor = new Vector(0.5,0.5);
+	}
+	#Origin(go,render){
+		if(go == null)return;
+		render.rotate(-go.transform.rotate * Math.PI/180);
+		render.scale(1/go.transform.scale.x,1/go.transform.scale.y);
+		render.translate(-go.transform.position.x,-go.transform.position.y);
+		this.#Origin(go.parent,render);
+	}
+	#Translate(gameObject){
+		if(gameObject.parent == null)return {
+			transform:{
+				position:new Vector(gameObject.transform.position.x,gameObject.transform.position.y),
+				rotate:gameObject.transform.rotate,
+				scale:new Vector(gameObject.transform.scale.x,gameObject.transform.scale.y)
+			},
+			data:null
+		}
+		let data = this.#Translate(gameObject.parent);
+		data.data = {
+			transform:{
+				position:new Vector(gameObject.transform.position.x,gameObject.transform.position.y),
+				rotate:gameObject.transform.rotate,
+				scale:new Vector(gameObject.transform.scale.x,gameObject.transform.scale.y)
+			},
+			data:null
+		}
+	}
+	#WorldPosition(render,gameObject){
+		render.translate(gameObject.transform.position.x,gameObject.transform.position.y);
+        render.scale(gameObject.transform.scale.x,gameObject.transform.scale.y);
+		render.rotate(gameObject.transform.rotate * Math.PI/180);
+		if(gameObject.data)this.#WorldPosition(render,gameObject.data);
 	}
 	
 	Play(){
@@ -302,6 +340,9 @@ class Particles extends Component{
 		this.#emitTimes = 0;
 	}
 	
+	getSize(){
+		return this.#data.length;
+	}
 	setTarget(target){
 		if(typeof target != "number" && target.type != "Image")console.warn("Particles组件--->>>","不支持资源",target);
 		this.#target = target;
