@@ -689,6 +689,9 @@ window.onload = function(){
     let isMove = false;
     Render.canvas.onmousedown = function(e){
         isMove = true;
+        let x = e.offsetX - (Render.width/2|0);
+        let y = e.offsetY - (Render.height/2|0);
+        particles.gameObject.transform.position = new Vector(x,y);
     }
     Render.canvas.onmousemove = function(e){
         if(isMove){

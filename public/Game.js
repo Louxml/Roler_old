@@ -6,7 +6,7 @@ var Game = {
     Run(t=0){
         requestAnimationFrame(Game.Run.bind(this));
         Timer.Update(t);
-        Scene.Update(Timer.deltaTime);
+        if(Render.active)Scene.Update(Timer.deltaTime);
         Render.Update(Timer.deltaTime);
     },
 }

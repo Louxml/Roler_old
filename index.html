@@ -9,6 +9,10 @@
             padding:0;
             margin:0;
         }
+        html,body{
+            width:100%;
+            height:100%;
+        }
         canvas{
             position:absolute;
         }
@@ -26,6 +30,8 @@
     <script src="/public/GameObject/Sprite.js"></script>
     <script src="/public/GameObject/Text.js"></script>
     <script src="/public/GameObject/Particles.js"></script>
+    <script src="/public/GameObject/UIText.js"></script>
+    <script src="/public/GameObject/UIButton.js"></script>
     <script src="/public/Loader.js"></script>
     <script src="/public/NetWork.js"></script>
     <script src="/public/Input.js"></script>
@@ -75,6 +81,20 @@
     // particles.transform.scale = new Vector(10,10);
     login.Add(particles);
     console.log(particlesComp);
+
+    // 测试UIText组件
+    let ui_textComp = new UIText();
+    let ui_text = new GameObject().AddComponent(ui_textComp);
+    ui_textComp.text = "741851";
+    login.Add(ui_text);
+    console.log(ui_textComp);
+
+    // 测试UIButton组件
+    let ui_btnComp = new UIButton();
+    let ui_btn = new GameObject().AddComponent(ui_btnComp);
+    ui_btnComp.text = "开始";
+    login.Add(ui_btn);
+    console.log(ui_btnComp);
 
     
     // 测试Timer系统

@@ -10,10 +10,14 @@ let Render = new class Render{
     }
     Init(){
         this.canvas = document.getElementById("Game");
+        this.ui = document.createElement("div");
+        this.ui.style.width = "100%";
+        this.ui.style.height = "100%";
         this.canvas.width = this.width;
         this.canvas.height = this.height;
         this.render = this.canvas.getContext("2d");
         document.body.oncontextmenu = () => {return false;}
+        document.body.appendChild(this.ui);
     }
     Update(t){
         if(document.body && !this.active){
@@ -25,11 +29,26 @@ let Render = new class Render{
     SetCameras(cameras){
         this.cameras = cameras;
     }
+    CreateDIV(type='div'){
+        let div = document.createElement(type);
+        div.style.position = "absolute";
+        div.style.border = "none";
+        div.style.outline = "none";
+        div.style.width = "0px";
+        div.style.height = "0px";
+        return div;
+    }
     AddLayer(layer){
         if(typeof layer == "string" && !this.layers.includes(layer))this.layers.push(layer);
     }
     RemoveLayer(layer){
         this.layers.splice(this.layers.indexOf(layer),1);
+    }
+    AddUI(html){
+        this.ui.appendChild(html);
+    }
+    RemoveUI(html){
+        this.ui.removeChild(html);
     }
     CreateRender(width=0,height=0){
         let canvas = document.createElement('canvas');
@@ -43,6 +62,7 @@ let Render = new class Render{
         // document.body.appendChild(canvas);
         return context;
     }
+
     
     Render(){
         if(this.render){
