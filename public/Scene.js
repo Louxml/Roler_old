@@ -76,13 +76,17 @@ class Scene{
             this.data[i].OnDestroy();
         }
     }
+    Destroy(){
+        for(var i in this.data){
+            this.data[i].Destroy();
+        }
+    }
 
     Add(gameObject){
         if(gameObject.parent){
             let data = gameObject.parent.data;
             data.splice(data.indexOf(gameObject),1);
         }
-        // gameObject.parent = null;
         gameObject.scene = this;
         this.data.push(gameObject);
     }
@@ -107,14 +111,18 @@ Scene.Add = function(scene){
 Scene.Start = function(index){
     switch(typeof index){
         case "number":
-            if(index >= 0 && index < this.data.length)this.index = index;
-            else console.warn("Index 不存在");
+            if(index >= 0 && index < this.data.length){
+                if(this.index >= 0)this.data[this.index].Destroy();
+                this.index = index;
+            }else console.warn("Index 不存在");
             break;
         case "object":
             if(index.constructor.name == "Scene"){
                 var index = this.data.indexOf(index);
-                if(index != -1)this.index = index;
-                else console.warn("Scene 不存在");
+                if(index != -1){
+                    if(this.index >= 0)this.data[this.index].Destroy();
+                    this.index = index;
+                }else console.warn("Scene 不存在");
             }else{
                 console.warn("不是 Scene 对象");
             }
@@ -124,6 +132,7 @@ Scene.Start = function(index){
             for(var i in this.data){
                 if(this.data[i].name == index){
                     f = true;
+                    if(this.index >= 0)this.data[this.index].Destroy();
                     this.index = i;
                     break;
                 }

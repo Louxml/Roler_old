@@ -194,6 +194,13 @@ class UIComponent extends Component{
         }
         Render.AddUI(this.html);
     }
+    Start(){
+        if(this.gameObject.html){
+            console.log("UI组件","--->>>","已存在");
+            return;
+        }
+        this.gameObject.html = this.html;
+    }
 
     OnEnable(){
         this.html.style.display = "block";
@@ -205,5 +212,6 @@ class UIComponent extends Component{
 
     OnDestroy(){
         Render.RemoveUI(this.html);
+
     }
 }
