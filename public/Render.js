@@ -31,7 +31,6 @@ let Render = new class Render{
     }
     CreateDIV(type='div'){
         let div = document.createElement(type);
-        div.style.position = "absolute";
         div.style.border = "none";
         div.style.outline = "none";
         div.style.width = "0px";
