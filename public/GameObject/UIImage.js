@@ -1,10 +1,11 @@
-class UIText extends UIComponent{
+class UIImage extends UIComponent{
 
-    constructor(text=''){
-        super();
-        this.text = text;
-        this.width = 100;
-        this.height = 40;
+    constructor(src=''){
+        super('image');
+        this.html = new Image();
+        this.text = '';
+        this.width = 400;
+        this.height = 400;
         this.lineHeight = 40;
         this.size = 20;
         this.color = "#000";
@@ -21,6 +22,7 @@ class UIText extends UIComponent{
         this.top = "";
         this.anchor = new Vector(0,0);
         this.zoom = 0;
+        this.src = src;
     }
 
     Onclick(e){

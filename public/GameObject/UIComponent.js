@@ -1,10 +1,16 @@
 class UIComponent extends Component{
 
-    constructor(){
+    constructor(type='div'){
         super();
-        this.html = Render.CreateDIV();
+        this.html = Render.CreateDIV(type);
     }
 
+    set src(value){
+        this.html.src = value;
+    }
+    get src(){
+        return this.html.src;
+    }
     set width(value){
         this.html.style.width = value+"px";
     }
@@ -184,15 +190,14 @@ class UIComponent extends Component{
         return this.html.style.zIndex;
     }
 
-    Onclick(e){
-        
-    }
-
     Awake(){
         this.html.onclick = function(e){
             this.Onclick(e);
-        }
+        }.bind(this)
         Render.AddUI(this.html);
+    }
+    Onclick(e){
+        
     }
     Start(){
         if(this.gameObject.html){

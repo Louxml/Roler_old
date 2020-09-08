@@ -33,6 +33,7 @@
     <script src="/public/GameObject/Particles.js"></script>
     <script src="/public/GameObject/UIText.js"></script>
     <script src="/public/GameObject/UIButton.js"></script>
+    <script src="/public/GameObject/UIImage.js"></script>
     <script src="/public/Loader.js"></script>
     <script src="/public/NetWork.js"></script>
     <script src="/public/Input.js"></script>
@@ -88,7 +89,7 @@
     let ui_text = new GameObject().AddComponent(ui_textComp);
     ui_textComp.text = "741851";
     login.Add(ui_text);
-    console.log(ui_textComp);
+    // console.log(ui_textComp);
 
     // 测试UIButton组件
     let ui_btnComp = new UIButton();
@@ -96,7 +97,15 @@
     // ui_btnComp.left = 200;
     ui_btnComp.text = "开始";
     login.Add(ui_btn);
-    console.log(ui_btnComp);
+    // console.log(ui_btnComp);
+
+    // 测试UIImage组件
+    let ui_imgComp = new UIImage('/public/Assets/player.png');
+    let ui_img = new GameObject().AddComponent(ui_imgComp);
+    // ui_imgComp.left = 200;
+    // ui_imgComp.text = "开始";
+    login.Add(ui_img);
+    console.log(ui_imgComp);
 
     
     // 测试Timer系统

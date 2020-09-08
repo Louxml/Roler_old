@@ -1,7 +1,7 @@
 class UIButton extends UIComponent{
 
     constructor(text='按钮'){
-        super();
+        super('button');
         this.text = text;
         this.width = 120;
         this.height = 40;
