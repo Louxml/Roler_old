@@ -2,7 +2,6 @@ class UIText extends UIComponent{
 
     constructor(text=''){
         super();
-        this.html = Render.CreateDIV();
         this.text = text;
         this.width = 100;
         this.height = 40;

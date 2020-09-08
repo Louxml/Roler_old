@@ -2,7 +2,6 @@ class UIButton extends UIComponent{
 
     constructor(text='按钮'){
         super();
-        this.html = Render.CreateDIV('button');
         this.text = text;
         this.width = 120;
         this.height = 40;
