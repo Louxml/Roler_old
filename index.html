@@ -25,6 +25,7 @@
     <script src="/public/Event.js"></script>
     <script src="/public/GameObject/GameObject.js"></script>
     <script src="/public/GameObject/Component.js"></script>
+    <script src="/public/GameObject/UIComponent.js"></script>
     <script src="/public/GameObject/Camera.js"></script>
     <script src="/public/GameObject/Transform.js"></script>
     <script src="/public/GameObject/Sprite.js"></script>
@@ -73,14 +74,14 @@
 
 
     // 测试Particles组件
-    let particlesComp = new Particles();
-    let particles = new GameObject("particles")
-    particles.AddComponent(particlesComp);
+    // let particlesComp = new Particles();
+    // let particles = new GameObject("particles")
+    // particles.AddComponent(particlesComp);
     // particles.transform.position = new Vector(0,100);
-    particlesComp.Play();
+    // particlesComp.Play();
     // particles.transform.scale = new Vector(10,10);
-    login.Add(particles);
-    console.log(particlesComp);
+    // login.Add(particles);
+    // console.log(particlesComp);
 
     // 测试UIText组件
     let ui_textComp = new UIText();
@@ -92,6 +93,7 @@
     // 测试UIButton组件
     let ui_btnComp = new UIButton();
     let ui_btn = new GameObject().AddComponent(ui_btnComp);
+    // ui_btnComp.left = 200;
     ui_btnComp.text = "开始";
     login.Add(ui_btn);
     console.log(ui_btnComp);
