@@ -1,12 +1,11 @@
-class UIImage extends UIComponent{
-
-    constructor(src=''){
-        super('image');
-        this.html = new Image();
-        this.text = '';
-        this.width = 400;
-        this.height = 400;
-        this.lineHeight = 40;
+class UIInput extends UIComponent{
+    constructor(){
+        super('input');
+        this.type = "text";
+        this.width = 180;
+        this.height = 40;
+        this.placeholder = "";
+        this.lineHeight = 16;
         this.size = 20;
         this.color = "#000";
         this.background = "";
@@ -15,21 +14,29 @@ class UIImage extends UIComponent{
         this.alpha = 1;
         this.weight = 500;
         this.overflow = false;
-        this.borderBottom = "";
+        this.borderBottom = "2px solid #888";
         this.boxShadow = "";
         this.cursor = "";
         this.left = "";
         this.top = "";
+        this.right = "";
+        this.bottom = "";
         this.anchor = new Vector(0,0);
         this.zoom = 0;
-        this.src = src;
+        this.position = "relative";
     }
 
-    set src(value){
-        this.html.src = value;
+    set type(value){
+        this.html.type = value;
     }
-    get src(){
-        return this.html.src;
+    get type(){
+        return this.html.type;
+    }
+    set placeholder(value){
+        this.html.placeholder = value;
+    }
+    get placeholder(){
+        return this.html.placeholder;
     }
 
     Onclick(e){

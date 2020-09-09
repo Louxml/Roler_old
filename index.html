@@ -8,6 +8,7 @@
         *{
             padding:0;
             margin:0;
+            -webkit-user-select: none;
         }
         html,body{
             width:100%;
@@ -15,6 +16,17 @@
         }
         canvas{
             position:absolute;
+        }
+        .box{
+            display:block;
+            width:auto;
+            height:auto;
+            background:#f96;
+        }
+        .item{
+            width:100px;
+            height:100px;
+            background:#69f;
         }
     </style>
     <script src="/socket.io/socket.io.js"></script>
@@ -34,6 +46,10 @@
     <script src="/public/GameObject/UIText.js"></script>
     <script src="/public/GameObject/UIButton.js"></script>
     <script src="/public/GameObject/UIImage.js"></script>
+    <script src="/public/GameObject/UIHorizontalLayout.js"></script>
+    <script src="/public/GameObject/UIVerticalLayout.js"></script>
+    <script src="/public/GameObject/UIGridLayout.js"></script>
+    <script src="/public/GameObject/UIInput.js"></script>
     <script src="/public/Loader.js"></script>
     <script src="/public/NetWork.js"></script>
     <script src="/public/Input.js"></script>
@@ -45,6 +61,13 @@
 </head>
 <body>
     <canvas id="Game"></canvas>
+    <!-- <div class="box">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div> -->
 <script>
     // 创建场景
     let login = new Scene('login');
@@ -84,11 +107,15 @@
     // login.Add(particles);
     // console.log(particlesComp);
 
+    // 测试UIHorizontal组件
+    let ui_horizontal = new UIGridLayout();
+    let ui_hlayout = new GameObject().AddComponent(ui_horizontal);
+    login.Add(ui_hlayout);
     // 测试UIText组件
     let ui_textComp = new UIText();
     let ui_text = new GameObject().AddComponent(ui_textComp);
     ui_textComp.text = "741851";
-    login.Add(ui_text);
+    ui_hlayout.Add(ui_text);
     // console.log(ui_textComp);
 
     // 测试UIButton组件
@@ -96,7 +123,7 @@
     let ui_btn = new GameObject().AddComponent(ui_btnComp);
     // ui_btnComp.left = 200;
     ui_btnComp.text = "开始";
-    login.Add(ui_btn);
+    ui_hlayout.Add(ui_btn);
     // console.log(ui_btnComp);
 
     // 测试UIImage组件
@@ -104,8 +131,12 @@
     let ui_img = new GameObject().AddComponent(ui_imgComp);
     // ui_imgComp.left = 200;
     // ui_imgComp.text = "开始";
-    login.Add(ui_img);
-    console.log(ui_imgComp);
+    ui_hlayout.Add(ui_img);
+
+    // 测试UIInput组件
+    let ui_inputComp = new UIInput();
+    let ui_input = new GameObject().AddComponent(ui_inputComp);
+    ui_hlayout.Add(ui_input);
 
     
     // 测试Timer系统

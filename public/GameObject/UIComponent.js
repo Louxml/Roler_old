@@ -3,22 +3,19 @@ class UIComponent extends Component{
     constructor(type='div'){
         super();
         this.html = Render.CreateDIV(type);
+        this.html.style.display = "block";
     }
 
-    set src(value){
-        this.html.src = value;
-    }
-    get src(){
-        return this.html.src;
-    }
     set width(value){
-        this.html.style.width = value+"px";
+        value = typeof value == 'number'?value+'px':value;
+        this.html.style.width = value;
     }
     get width(){
         return this.html.style.width;
     }
     set height(value){
-        this.html.style.height = value+"px";
+        value = typeof value == 'number'?value+'px':value;
+        this.html.style.height = value;
     }
     get height(){
         return this.html.style.height;
@@ -122,7 +119,7 @@ class UIComponent extends Component{
     set borderBottom(value){
         this.html.style.borderBottom = value;
     }
-    get borderBotton(){
+    get borderBottom(){
         return this.html.style.borderBottom;
     }
     set borderLeft(value){
@@ -189,34 +186,36 @@ class UIComponent extends Component{
     get zoom(){
         return this.html.style.zIndex;
     }
+    set position(value){
+        this.html.style.position = value;
+    }
+    get position(){
+        return this.html.style.position;
+    }
 
     Awake(){
         this.html.onclick = function(e){
             this.Onclick(e);
-        }.bind(this)
-        Render.AddUI(this.html);
+        }.bind(this);
+        if(!this.html.parentNode)Render.AddUI(this.html);
     }
     Onclick(e){
         
     }
     Start(){
-        if(this.gameObject.html){
-            console.log("UI组件","--->>>","已存在");
-            return;
-        }
-        this.gameObject.html = this.html;
+        
     }
 
     OnEnable(){
-        this.html.style.display = "block";
+        this.html.style.visibility = "visible";
     }
 
     OnDisable(){
-        this.html.style.display = "none";
+        this.html.style.display = "hidden";
     }
 
     OnDestroy(){
-        Render.RemoveUI(this.html);
+        this.html.parentNode.removeChild(this.html);
 
     }
 }

@@ -114,7 +114,7 @@ class GameObject{
             }
             gameObject.parent = this;
             gameObject.scene = this.scene;
-            if(gameObject.html)this.html.appendChild(gameObject.html);
+            if(this.html && gameObject.html)this.html.appendChild(gameObject.html);
             this.data.push(gameObject);
         }else{
             //警告信息
@@ -138,6 +138,7 @@ class GameObject{
             }
         }
         comp.gameObject = this;
+        if(!this.html && comp.html)this.html = comp.html;
         this.components.push(comp);
         return this;
     }

@@ -1,12 +1,10 @@
-class UIImage extends UIComponent{
-
-    constructor(src=''){
-        super('image');
-        this.html = new Image();
-        this.text = '';
-        this.width = 400;
-        this.height = 400;
-        this.lineHeight = 40;
+class UIHorizontalLayout extends UIComponent{
+    constructor(){
+        super();
+        this.html.style.display = "inline-flex";
+        this.width = "auto";
+        this.height = "auto";
+        this.lineHeight = 16;
         this.size = 20;
         this.color = "#000";
         this.background = "";
@@ -15,21 +13,15 @@ class UIImage extends UIComponent{
         this.alpha = 1;
         this.weight = 500;
         this.overflow = false;
-        this.borderBottom = "";
         this.boxShadow = "";
         this.cursor = "";
         this.left = "";
         this.top = "";
+        this.right = "";
+        this.bottom = "";
         this.anchor = new Vector(0,0);
         this.zoom = 0;
-        this.src = src;
-    }
-
-    set src(value){
-        this.html.src = value;
-    }
-    get src(){
-        return this.html.src;
+        this.position = "relative";
     }
 
     Onclick(e){

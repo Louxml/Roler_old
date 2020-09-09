@@ -14,13 +14,13 @@ class UIText extends UIComponent{
         this.alpha = 1;
         this.weight = 500;
         this.overflow = false;
-        this.borderBottom = "";
         this.boxShadow = "";
         this.cursor = "";
         this.left = "";
         this.top = "";
         this.anchor = new Vector(0,0);
         this.zoom = 0;
+        this.position = "relative";
     }
 
     Onclick(e){
