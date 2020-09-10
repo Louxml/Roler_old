@@ -1,8 +1,7 @@
 class UIImage extends UIComponent{
 
     constructor(src=''){
-        super('image');
-        this.html = new Image();
+        super('img');
         this.width = 400;
         this.height = 400;
 

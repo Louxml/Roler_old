@@ -5,14 +5,12 @@ class UIHorizontalLayout extends UIComponent{
         this.html.style.flexDirection = "row";
         this.html.style.width = "auto";
 
-        this.width = "auto";
         this.height = "auto";
-
         this.overflow = "hidden";
     }
 
     set width(value){
-        console.log("UIHorizontal组件","--->>>","宽度自定义");
+        console.warn("UIHorizontal组件","--->>>","宽度自定义",value);
     }
     get width(){
         return this.html.clientWidth;

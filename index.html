@@ -17,16 +17,20 @@
         canvas{
             position:absolute;
         }
-        .box{
-            display:block;
-            width:auto;
-            height:auto;
-            background:#f96;
+        ::-webkit-scrollbar{
+            height:6px;
+            width:6px;
+            background-color: rgba(27,27,27,.4);
+            border-radius: 10px;
         }
-        .item{
-            width:100px;
-            height:100px;
-            background:#69f;
+        ::-webkit-scrollbar-thumb{
+            border-radius: 10px;
+            background: rgba(27,27,27,.4);
+        }
+
+        ::-webkit-scrollbar-track{
+            border-radius: 10px;
+            background: #ccc;
         }
     </style>
     <script src="/socket.io/socket.io.js"></script>
@@ -49,6 +53,7 @@
     <script src="/public/GameObject/UIHorizontalLayout.js"></script>
     <script src="/public/GameObject/UIVerticalLayout.js"></script>
     <script src="/public/GameObject/UIGridLayout.js"></script>
+    <script src="/public/GameObject/UIScrollLayout.js"></script>
     <script src="/public/GameObject/UIInput.js"></script>
     <script src="/public/Loader.js"></script>
     <script src="/public/NetWork.js"></script>
@@ -108,10 +113,9 @@
     // console.log(particlesComp);
 
     // 测试UIHorizontal组件
-    let ui_horizontal = new UIGridLayout();
+    let ui_horizontal = new UIVerticalLayout();
     // ui_horizontal.width = 200;
-    // ui_horizontal.height = 100;
-    console.log(ui_horizontal.height);
+    ui_horizontal.height = 100;
     let ui_hlayout = new GameObject().AddComponent(ui_horizontal);
     login.Add(ui_hlayout);
     // 测试UIText组件
@@ -124,6 +128,12 @@
     ui_hlayout.Add(new GameObject().AddComponent(new UIText('78546132')));
     ui_hlayout.Add(new GameObject().AddComponent(new UIText('78546132')));
     ui_hlayout.Add(new GameObject().AddComponent(new UIText('78546132')));
+
+    // 测试UIScrollLayout组件
+    let ui_scrollComp = new UIScrollLayout();
+    let ui_scroll = new GameObject().AddComponent(ui_scrollComp);
+    ui_scroll.Add(ui_hlayout);
+    login.Add(ui_scroll);
     // console.log(ui_textComp);
 
     // 测试UIButton组件

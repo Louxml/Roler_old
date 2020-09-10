@@ -5,8 +5,8 @@ class UIComponent extends Component{
         this.html = Render.CreateDIV(type);
         this.html.style.display = "block";
         
-        this.width = 0;
-        this.height = 0;
+        // this.width = 0;
+        // this.height = 0;
         this.background = "";
         this.radius = 0;
 

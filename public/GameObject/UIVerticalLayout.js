@@ -6,8 +6,6 @@ class UIVerticalLayout extends UIComponent{
         this.html.style.height = "auto";
 
         this.width = "auto";
-        this.height = "auto";
-        
         this.overflow = "hidden";
     }
 
