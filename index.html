@@ -109,6 +109,9 @@
 
     // 测试UIHorizontal组件
     let ui_horizontal = new UIGridLayout();
+    // ui_horizontal.width = 200;
+    // ui_horizontal.height = 100;
+    console.log(ui_horizontal.height);
     let ui_hlayout = new GameObject().AddComponent(ui_horizontal);
     login.Add(ui_hlayout);
     // 测试UIText组件
@@ -116,6 +119,11 @@
     let ui_text = new GameObject().AddComponent(ui_textComp);
     ui_textComp.text = "741851";
     ui_hlayout.Add(ui_text);
+    ui_hlayout.Add(new GameObject().AddComponent(new UIText('78546132')));
+    ui_hlayout.Add(new GameObject().AddComponent(new UIText('78546132')));
+    ui_hlayout.Add(new GameObject().AddComponent(new UIText('78546132')));
+    ui_hlayout.Add(new GameObject().AddComponent(new UIText('78546132')));
+    ui_hlayout.Add(new GameObject().AddComponent(new UIText('78546132')));
     // console.log(ui_textComp);
 
     // 测试UIButton组件
@@ -123,7 +131,7 @@
     let ui_btn = new GameObject().AddComponent(ui_btnComp);
     // ui_btnComp.left = 200;
     ui_btnComp.text = "开始";
-    ui_hlayout.Add(ui_btn);
+    login.Add(ui_btn);
     // console.log(ui_btnComp);
 
     // 测试UIImage组件
@@ -131,12 +139,12 @@
     let ui_img = new GameObject().AddComponent(ui_imgComp);
     // ui_imgComp.left = 200;
     // ui_imgComp.text = "开始";
-    ui_hlayout.Add(ui_img);
+    login.Add(ui_img);
 
     // 测试UIInput组件
     let ui_inputComp = new UIInput();
     let ui_input = new GameObject().AddComponent(ui_inputComp);
-    ui_hlayout.Add(ui_input);
+    login.Add(ui_input);
 
     
     // 测试Timer系统

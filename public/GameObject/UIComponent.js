@@ -4,6 +4,24 @@ class UIComponent extends Component{
         super();
         this.html = Render.CreateDIV(type);
         this.html.style.display = "block";
+        
+        this.width = 0;
+        this.height = 0;
+        this.background = "";
+        this.radius = 0;
+
+        
+        this.alpha = 1;
+        // this.overflow = false;
+        this.boxShadow = "";
+        // this.border
+
+        this.cursor = "";
+        this.left = "";
+        this.top = "";
+        this.anchor = new Vector(0,0);
+        this.zoom = 0;
+        this.position = "relative";
     }
 
     set width(value){
@@ -11,33 +29,18 @@ class UIComponent extends Component{
         this.html.style.width = value;
     }
     get width(){
-        return this.html.style.width;
+        return this.html.clientWidth;
     }
     set height(value){
         value = typeof value == 'number'?value+'px':value;
         this.html.style.height = value;
     }
     get height(){
-        return this.html.style.height;
+        return this.html.clientHeight;
     }
-    set text(value){
-        this.html.innerText = value;
-    }
-    get text(){
-        return this.html.innerText;
-    }
-    set size(value){
-        this.html.style.fontSize = value+"px";
-    }
-    get size(){
-        return this.html.style.fontSize;
-    }
-    set color(value){
-        this.html.style.color = value;
-    }
-    get color(){
-        return this.html.style.color;
-    }
+   
+    
+    
     set background(value){
         this.html.style.background = value;
     }
@@ -74,18 +77,7 @@ class UIComponent extends Component{
     get bottomRightRadius(){
         return this.html.style.borderBottomRightRadius;
     }
-    set lineHeight(value){
-        this.html.style.lineHeight = value+"px";
-    }
-    get lineHeight(){
-        return this.html.style.lineHeight;
-    }
-    set align(value){
-        this.html.style.textAlign = value;
-    }
-    get align(){
-        return this.html.style.textAlign;
-    }
+    
     set alpha(value){
         this.html.style.opacity = value;
     }
@@ -93,7 +85,7 @@ class UIComponent extends Component{
         return this.html.style.opacity;
     }
     set overflow(value){
-        this.html.style.overflow = value?"visible":'hidden';
+        this.html.style.overflow = value;
     }
     get overflow(){
         return this.html.style.overflow;
@@ -134,12 +126,7 @@ class UIComponent extends Component{
     get borderRight(){
         return this.html.style.borderRight;
     }
-    set weight(value){
-        this.html.style.fontWeight = value;
-    }
-    get weight(){
-        return this.html.style.fontWeight;
-    }
+    
     set cursor(value){
         this.html.style.cursor = value;
     }

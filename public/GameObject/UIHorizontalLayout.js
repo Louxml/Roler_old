@@ -2,26 +2,27 @@ class UIHorizontalLayout extends UIComponent{
     constructor(){
         super();
         this.html.style.display = "inline-flex";
+        this.html.style.flexDirection = "row";
+        this.html.style.width = "auto";
+
         this.width = "auto";
         this.height = "auto";
-        this.lineHeight = 16;
-        this.size = 20;
-        this.color = "#000";
-        this.background = "";
-        this.radius = 0;
-        this.align = "left";
-        this.alpha = 1;
-        this.weight = 500;
-        this.overflow = false;
-        this.boxShadow = "";
-        this.cursor = "";
-        this.left = "";
-        this.top = "";
-        this.right = "";
-        this.bottom = "";
-        this.anchor = new Vector(0,0);
-        this.zoom = 0;
-        this.position = "relative";
+
+        this.overflow = "hidden";
+    }
+
+    set width(value){
+        console.log("UIHorizontal组件","--->>>","宽度自定义");
+    }
+    get width(){
+        return this.html.clientWidth;
+    }
+    set height(value){
+        value = typeof value == 'number'?value+'px':value;
+        this.html.style.height = value;
+    }
+    get height(){
+        return this.html.clientHeight;
     }
 
     Onclick(e){

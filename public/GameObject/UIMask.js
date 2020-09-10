@@ -1,30 +1,18 @@
-class UIImage extends UIComponent{
-
-    constructor(src=''){
-        super('image');
-        this.html = new Image();
-        this.width = 400;
-        this.height = 400;
+class UIMask extends UIComponent{
+    constructor(){
+        super();
+        this.width = 100;
+        this.height = 100;
 
         this.overflow = false;
-        this.src = src;
+
     }
 
-    set src(value){
-        this.html.src = value;
-    }
-    get src(){
-        return this.html.src;
-    }
     set overflow(value){
         this.html.style.overflow = value?"visible":'hidden';
     }
     get overflow(){
         return this.html.style.overflow;
-    }
-
-    Onclick(e){
-        
     }
 
     Awake(){
