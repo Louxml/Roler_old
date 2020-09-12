@@ -22,7 +22,6 @@ class UIScrollLayout extends UIComponent{
     }
 
     Awake(){
-        console.log({html:this.html});
         super.Awake();
     }
 

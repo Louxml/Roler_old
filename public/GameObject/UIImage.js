@@ -2,6 +2,7 @@ class UIImage extends UIComponent{
 
     constructor(src=''){
         super('img');
+        this.html.draggable = false;
         this.width = 400;
         this.height = 400;
 

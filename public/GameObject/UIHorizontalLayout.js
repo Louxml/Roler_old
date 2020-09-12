@@ -29,6 +29,7 @@ class UIHorizontalLayout extends UIComponent{
 
     Awake(){
         super.Awake();
+        
     }
 
     OnEnable(){

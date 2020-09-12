@@ -39,17 +39,36 @@ class Camera extends Component{
             this.CameraRender(data[i]);
         }
         this.canvas.restore();
+
+        let light = this.gameObject.scene.light;
+        this.canvas.save();
+        this.canvas.fillStyle = light.color;
+        this.canvas.drawImage(light.render.canvas,0,0,light.render.canvas.width,light.render.canvas.height);
+        this.canvas.restore();
     }
     CameraRender(gameObject){
         this.canvas.save();
         gameObject.transform.Translate(this);
-        this.canvas.imageSmoothingEnabled = !gameObject.render.pixel;
-        this.canvas.globalAlpha = gameObject.render.alpha;
-        this.canvas.drawImage(gameObject.render.canvas,-gameObject.transform.anchor.x * gameObject.render.canvas.width|0,-gameObject.transform.anchor.y * gameObject.render.canvas.height|0);
+        if(gameObject.render){
+            this.canvas.imageSmoothingEnabled = !gameObject.render.pixel;
+            this.canvas.globalAlpha = gameObject.render.alpha;
+            this.canvas.drawImage(gameObject.render.canvas,-gameObject.transform.anchor.x * gameObject.render.canvas.width|0,-gameObject.transform.anchor.y * gameObject.render.canvas.height|0);
+        }
+        if(gameObject.light){
+            let light = gameObject.scene.light.render;
+            light.save();
+            let t = this.canvas.getTransform();
+            light.setTransform(t.a,t.b,t.c,t.d,t.e,t.f);
+            light.drawImage(gameObject.light.canvas,(-0.5 * gameObject.light.canvas.width)|0,(-0.5 * gameObject.light.canvas.height)|0);
+            //颜色光构想
+            // light.globalCompositeOperation = "destination-over";
+            // light.drawImage(gameObject.light.canvas,(-0.5 * gameObject.light.canvas.width)|0,(-0.5 * gameObject.light.canvas.height)|0);
+            light.restore();
+        }
         this.canvas.restore();
     }
     Tree(gameObject,table){
-        if(gameObject.render && Render.layers.includes(gameObject.layer)){
+        if((gameObject.render || gameObject.light) && Render.layers.includes(gameObject.layer)){
             if(table[gameObject.zoom]){
                 table[gameObject.zoom].push(gameObject);
             }else{

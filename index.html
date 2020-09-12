@@ -47,6 +47,7 @@
     <script src="/public/GameObject/Sprite.js"></script>
     <script src="/public/GameObject/Text.js"></script>
     <script src="/public/GameObject/Particles.js"></script>
+    <script src="/public/GameObject/PointLight.js"></script>
     <script src="/public/GameObject/UIText.js"></script>
     <script src="/public/GameObject/UIButton.js"></script>
     <script src="/public/GameObject/UIImage.js"></script>
@@ -61,6 +62,7 @@
     <script src="/public/Render.js"></script>
     <script src="/public/Audio.js"></script>
     <script src="/public/Timer.js"></script>
+    <script src="/public/Light.js"></script>
     <script src="/public/Scene.js"></script>
     <script src="/public/Game.js"></script>
 </head>
@@ -113,7 +115,7 @@
     // console.log(particlesComp);
 
     // 测试UIHorizontal组件
-    let ui_horizontal = new UIVerticalLayout();
+    let ui_horizontal = new UIHorizontalLayout();
     // ui_horizontal.width = 200;
     ui_horizontal.height = 100;
     let ui_hlayout = new GameObject().AddComponent(ui_horizontal);
@@ -156,11 +158,21 @@
     let ui_input = new GameObject().AddComponent(ui_inputComp);
     login.Add(ui_input);
 
+    // 测试PointLight组件
+    let pointlightComp = new PointLight();
+    let pointlight = new GameObject().AddComponent(pointlightComp);
+    login.Add(pointlight);
+    // let pointlightComp1 = new PointLight();
+    // let pointlight1 = new GameObject().AddComponent(pointlightComp1);
+    // pointlight1.transform.position = new Vector(50,0);
+    // login.Add(pointlight1);
+
     
     // 测试Timer系统
     let skill = new Timer(function(e){
         // window.dispatchEvent(myEvent);
         // particles.transform.position.x++;
+        // pointlight.scene.light.brightness += 0.001;
     },1000/500);
     
     skill.Start();

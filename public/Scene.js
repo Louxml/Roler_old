@@ -3,6 +3,7 @@ class Scene{
         this.name = name;
         this.data = [];
         this.Add(new GameObject("Camera").AddComponent(new Camera()));
+        this.light = new Light();
     }
     Run(dt){
         this.Awake();
