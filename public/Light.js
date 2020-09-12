@@ -10,7 +10,7 @@ class Light{
         }
     }
 
-    constructor(brightness=0){
+    constructor(brightness=1){
         this.brightness = brightness;
         this.color = Light.color;
         this.render = Render.CreateRender();

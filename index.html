@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
     <title>Network</title>
     <style>
         *{
@@ -78,6 +78,7 @@
 <script>
     // 创建场景
     let login = new Scene('login');
+    login.light.brightness = 0;
     
     // 测试Sprite组件
     Loader.Sprite("player","/public/Assets/player.png",160,160);
