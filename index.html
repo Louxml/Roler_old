@@ -56,6 +56,8 @@
     <script src="/public/GameObject/UIGridLayout.js"></script>
     <script src="/public/GameObject/UIScrollLayout.js"></script>
     <script src="/public/GameObject/UIInput.js"></script>
+    <script src="/public/GameObject/UIProgress.js"></script>
+    <script src="/public/GameObject/UISwitch.js"></script>
     <script src="/public/Loader.js"></script>
     <script src="/public/NetWork.js"></script>
     <script src="/public/Input.js"></script>
@@ -118,7 +120,7 @@
     // 测试UIHorizontal组件
     let ui_horizontal = new UIHorizontalLayout();
     // ui_horizontal.width = 200;
-    ui_horizontal.height = 100;
+    // ui_horizontal.height = 100;
     let ui_hlayout = new GameObject().AddComponent(ui_horizontal);
     login.Add(ui_hlayout);
     // 测试UIText组件
@@ -158,6 +160,15 @@
     let ui_inputComp = new UIInput();
     let ui_input = new GameObject().AddComponent(ui_inputComp);
     login.Add(ui_input);
+    // 测试UIProgress组件
+    let ui_proComp = new UIProgress();
+    let ui_pro = new GameObject().AddComponent(ui_proComp);
+    login.Add(ui_pro);
+
+    // 测试UISwitch组件
+    let ui_switchComp = new UISwitch();
+    let ui_switch = new GameObject().AddComponent(ui_switchComp);
+    login.Add(ui_switch);
 
     // 测试PointLight组件
     let pointlightComp = new PointLight();
@@ -174,6 +185,7 @@
         // window.dispatchEvent(myEvent);
         // particles.transform.position.x++;
         // pointlight.scene.light.brightness += 0.001;
+        // ui_proComp.value += 0.01;
     },1000/500);
     
     skill.Start();

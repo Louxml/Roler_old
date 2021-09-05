@@ -38,9 +38,6 @@ class UIComponent extends Component{
     get height(){
         return this.html.clientHeight;
     }
-   
-    
-    
     set background(value){
         this.html.style.background = value;
     }
